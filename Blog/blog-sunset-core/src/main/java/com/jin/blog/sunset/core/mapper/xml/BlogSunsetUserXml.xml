@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jin.blog.sunset.core.mapper.BlogSunsetUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jin.blog.sunset.core.entity.BlogSunsetUser">
+        <id column="id" property="id" />
+        <result column="user_name" property="userName" />
+        <result column="user_pwd" property="userPwd" />
+        <result column="login_enable" property="loginEnable" />
+        <result column="login_error" property="loginError" />
+        <result column="login_last_time" property="loginLastTime" />
+        <result column="user_portrait" property="userPortrait" />
+        <result column="user_explain" property="userExplain" />
+        <result column="user_display_name" property="userDisplayName" />
+        <result column="user_email" property="userEmail" />
+        <result column="is_delete" property="delete" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_name, user_pwd, login_enable, login_error, login_last_time, user_portrait, user_explain, user_display_name, user_email, is_delete
+    </sql>
+
+</mapper>

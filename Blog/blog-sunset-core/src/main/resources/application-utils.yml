@@ -1,0 +1,16 @@
+# 数据库连接
+spring:
+  profiles: utils
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: Jinzelei+2022
+    username: root
+    url: jdbc:mysql://150.158.172.107:3306/blog_sunset?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+
+mybatis-plus:
+  mapper-locations: classpath:xml/*.xml

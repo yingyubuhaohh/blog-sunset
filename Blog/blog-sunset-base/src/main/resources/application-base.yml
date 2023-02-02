@@ -1,0 +1,11 @@
+spring:
+  profiles: base
+
+# swagger开关
+swagger:
+  # 后台管理模块api
+  system:
+    enable: true
+  # 前台门户模块api
+  portal:
+    enable: false

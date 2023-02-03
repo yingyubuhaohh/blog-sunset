@@ -18,6 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "后台系统接口",tags = {"后台系统接口"})
 public class SystemHelloController {
 
+    /**
+     * @Author jinzelei
+     * @Description  测试接口
+     * @Date  2023/2/2 10:02:39
+     * @Param
+     * @return
+     **/
     @ApiOperation("测试接口")
     @GetMapping("/hello")
     public String hello(){

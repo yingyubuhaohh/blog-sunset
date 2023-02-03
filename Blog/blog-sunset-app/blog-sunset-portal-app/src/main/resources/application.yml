@@ -1,19 +1,8 @@
-# portal
+# system
 server:
   port: 8080
 
 # 数据库连接
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 123456
-    username: root
-    url: jdbc:mysql://localhost:3306?blog_sunset&useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
-
-swagger:
-  # swagger开关
-  portal:
-    enable: false
-  # 不用管
-  system:
-    enable: false
+  profiles:
+    include: utils,base

@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 //放行
-              //  .antMatchers("/admin/user/**","/blog/**","/doc.html").anonymous()
+                .antMatchers("/admin/user/**","/blog/**","/doc.html").anonymous()
                 .anyRequest().authenticated();
 
         //配置JWT认证过滤器

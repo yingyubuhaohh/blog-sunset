@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-01 17:02:59
+ * @since 2023-02-03 17:57:15
  */
 @Getter
 @Setter
@@ -70,7 +70,7 @@ public class BlogSunsetUser implements Serializable {
 
     @ApiModelProperty("逻辑删除")
     @TableField("is_delete")
-    private Boolean delete;
+    private Integer isDelete;
 
 
 }

@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -35,14 +35,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
         //查询响应的用户
         BlogSunsetUser blogUser = blogSunsetLoginMapper.selectUserByUsername(s);
         if(Objects.isNull(blogUser)){
-            System.out.println("**********UserDetailServiceImpl"+blogUser);
             throw new RuntimeException("用户名或密码错误");
         }
         //TODO 查询用户的权限
         //List<String> list = new ArrayList<>(Arrays.asList("test","admin"));
-        //List<String> list = blogSunsetUserMapper.selectPermsByUserId(blogUser.getId());
+        List<String> list = blogSunsetLoginMapper.selectPermsByUserId(blogUser.getId());
         //封装UserDetails对象
-        return new LoginUser(blogUser,new ArrayList<>());
+        return new LoginUser(blogUser,list);
     }
 
 }

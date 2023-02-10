@@ -38,6 +38,17 @@
             <artifactId>swagger-bootstrap-ui</artifactId>
             <version>1.9.6</version>
         </dependency>
+        <!--redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${redis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>${commons.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

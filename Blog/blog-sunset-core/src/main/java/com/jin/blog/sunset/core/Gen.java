@@ -3,15 +3,18 @@ package com.jin.blog.sunset.core;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
+import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description mybatis-plus 代码生成器
+ * @Description mybatis-plus 代码生成器 在core模块使用
  * @ClassName: Gen
  * @author: jinzelei
  * @date: 2023/2/1 15:52
@@ -33,8 +36,9 @@ public class Gen {
                 .Builder("jdbc:mysql://localhost:3306/blog_sunset?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=UTF-8",
                 "root",
                 "123456")
-                .dbQuery(mySqlQuery).
-                        build();
+                .dbQuery(mySqlQuery)
+                .typeConvert(new MySqlTypeConvertCustom())
+                .build();
 
 
         //通过datasourceConfig创建AutoGenerator
@@ -50,7 +54,7 @@ public class Gen {
                 .author("jinzelei")//生成的作者名字
                 .enableSwagger()//开启swagger
                 .dateType(DateType.TIME_PACK)//时间策略
-                .commentDate("yyyy-MM-dd HH:MM:ss")//格式化时间格式
+                .commentDate("yyyy-MM-dd HH:mm:ss")//格式化时间格式
                 .disableOpenDir()//禁止打开输出目录，默认false
                 .fileOverride()//覆盖生成文件
                 .build();
@@ -80,7 +84,7 @@ public class Gen {
 //                .serviceImpl("/templates/serviceImpl.java")
 //                .mapper("/templates/mapper.java")
 //                .mapperXml("/templates/mapper.xml")
-//                .controller("/templates/controller.java")
+                //.controller("/templates/controller.java.vm")
                 .build();
 
 
@@ -112,7 +116,7 @@ public class Gen {
                 //.disableSerialVersionUID()禁用生成SerialVersionUID：默认true
                 .enableChainModel()//开启链式模型
                 .enableLombok()//开启lombok
-                .enableRemoveIsPrefix()//开启 Boolean 类型字段移除 is 前缀
+                //.enableRemoveIsPrefix()//开启 Boolean 类型字段移除 is 前缀
                 .enableTableFieldAnnotation()//开启生成实体时生成字段注解
                 //.addTableFills()添加表字段填充
                 .naming(NamingStrategy.underline_to_camel)//数据表映射实体命名策略：默认下划线转驼峰underline_to_camel
@@ -154,5 +158,18 @@ public class Gen {
                 .packageInfo(packages)
                 .strategy(strategyConfig)
                 .execute();
+    }
+}
+/**
+ * 自定义类型转换
+ */
+class MySqlTypeConvertCustom extends MySqlTypeConvert implements ITypeConvert{
+    @Override
+    public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+        String t = fieldType.toLowerCase();
+        if (t.contains("tinyint(1)")) {
+            return DbColumnType.INTEGER;
+        }
+        return super.processTypeConvert(globalConfig, fieldType);
     }
 }

@@ -1,6 +1,5 @@
 package com.jin.blog.sunset.base.config;
 
-import cn.hutool.core.util.BooleanUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.nio.file.Path;
+import java.util.ArrayList;
 
 /**
  * @Description

@@ -117,7 +117,7 @@ public class BlogSunsetCommentController {
     @PostMapping("/remove/{id}")
     @ApiOperation("逻辑删除")
     public R remove(@PathVariable Long id){
-        if(targetService.updateById(new BlogSunsetComment().setId(id).setIsDelete(true))){
+        if(targetService.updateById(new BlogSunsetComment().setId(id).setIsDelete(1))){
             return R.ok();
         }else{
             return R.error();
@@ -134,7 +134,7 @@ public class BlogSunsetCommentController {
     @PostMapping("/remove/batch")
     @ApiOperation("批量逻辑删除")
     public R removeBatch(@RequestBody List<Integer> ids) {
-        if(targetService.updateBatchById(targetService.listByIds(ids).stream().peek(e ->e.setIsDelete(true)).collect(Collectors.toList()))){
+        if(targetService.updateBatchById(targetService.listByIds(ids).stream().peek(e ->e.setIsDelete(1)).collect(Collectors.toList()))){
             return R.ok();
         }else{
             return R.error();

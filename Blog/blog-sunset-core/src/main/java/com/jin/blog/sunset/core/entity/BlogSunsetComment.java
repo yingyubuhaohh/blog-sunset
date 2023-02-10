@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-01 17:02:59
+ * @since 2023-02-03 17:57:14
  */
 @Getter
 @Setter
@@ -42,7 +42,7 @@ public class BlogSunsetComment implements Serializable {
 
     @ApiModelProperty("1：文章评论 2：留言")
     @TableField("type")
-    private Boolean type;
+    private Integer type;
 
     @ApiModelProperty("父级id")
     @TableField("pid")
@@ -62,11 +62,11 @@ public class BlogSunsetComment implements Serializable {
 
     @ApiModelProperty("1:已审核 0：未审核")
     @TableField("status")
-    private Boolean status;
+    private Integer status;
 
     @ApiModelProperty("是否删除")
     @TableField("is_delete")
-    private Boolean delete;
+    private Integer isDelete;
 
     @ApiModelProperty("点赞数")
     @TableField("like_num")

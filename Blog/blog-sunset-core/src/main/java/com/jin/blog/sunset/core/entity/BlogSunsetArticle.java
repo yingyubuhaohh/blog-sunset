@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-01 17:02:59
+ * @since 2023-02-03 17:57:14
  */
 @Getter
 @Setter
@@ -73,11 +73,11 @@ public class BlogSunsetArticle implements Serializable {
 
     @ApiModelProperty("是否删除")
     @TableField("is_delete")
-    private Boolean delete;
+    private Integer isDelete;
 
     @ApiModelProperty("是否置顶")
     @TableField("is_top")
-    private Boolean top;
+    private Integer isTop;
 
 
 }

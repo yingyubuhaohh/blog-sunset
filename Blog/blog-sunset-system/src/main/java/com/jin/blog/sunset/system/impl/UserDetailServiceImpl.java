@@ -1,6 +1,7 @@
 package com.jin.blog.sunset.system.impl;
 
 import com.jin.blog.sunset.core.entity.BlogSunsetUser;
+
 import com.jin.blog.sunset.core.mapper.business.BlogSunsetLoginMapper;
 import com.jin.blog.sunset.system.utils.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;

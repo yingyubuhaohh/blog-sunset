@@ -3,6 +3,7 @@ package com.jin.blog.sunset.system.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apiguardian.api.API;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/system")
 @Api(value = "后台系统接口",tags = {"后台系统接口"})
+@CrossOrigin
 public class SystemHelloController {
 
     /**

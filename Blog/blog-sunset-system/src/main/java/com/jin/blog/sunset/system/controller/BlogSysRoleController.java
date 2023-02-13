@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/blogSysRole")
 @Api(value = "角色权限接口",tags = {"角色权限接口"})
+@CrossOrigin
 public class BlogSysRoleController {
 
     @Autowired

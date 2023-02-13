@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/blogSunsetUser")
 @Api(value = "博客用户接口",tags = {"博客用户接口"})
+@CrossOrigin
 public class BlogSunsetUserController {
 
     @Autowired

@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/blogSysRoleMenu")
 @Api(value = "角色菜单接口",tags = {"角色菜单接口"})
+@CrossOrigin
 public class BlogSysRoleMenuController {
 
     @Autowired

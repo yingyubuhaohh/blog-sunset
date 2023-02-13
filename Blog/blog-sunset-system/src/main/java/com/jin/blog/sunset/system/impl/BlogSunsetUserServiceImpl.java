@@ -5,6 +5,8 @@ import com.jin.blog.sunset.base.cache.RedisUserKey;
 import com.jin.blog.sunset.base.response.R;
 import com.jin.blog.sunset.core.entity.BlogSunsetUser;
 import com.jin.blog.sunset.core.mapper.BlogSunsetUserMapper;
+import com.jin.blog.sunset.core.vo.InfoVo;
+import com.jin.blog.sunset.core.vo.LoginVo;
 import com.jin.blog.sunset.system.service.BlogSunsetUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jin.blog.sunset.system.utils.JwtTokenUtil;
@@ -14,11 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * <p>
@@ -37,6 +39,7 @@ public class BlogSunsetUserServiceImpl extends ServiceImpl<BlogSunsetUserMapper,
 
     @Autowired
     RedisService redisService;
+
     /**
      * @Author jinzelei
      * @Description  登录接口实现类
@@ -45,9 +48,9 @@ public class BlogSunsetUserServiceImpl extends ServiceImpl<BlogSunsetUserMapper,
      * @return R
      **/
     @Override
-    public R login(String username, String password) {
+    public R login(LoginVo loginVo) {
         //进行认证
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,password);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginVo.getUsername(),loginVo.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
 
         //未通过处理情况
@@ -87,5 +90,24 @@ public class BlogSunsetUserServiceImpl extends ServiceImpl<BlogSunsetUserMapper,
         }else {
             return new R(200,"网络错误",null);
         }
+    }
+
+    @Override
+    public R info(String token) {
+        //获取SecurityContextHolder中的用户id
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        Collection<? extends GrantedAuthority> authorities = loginUser.getAuthorities();
+        String avatar = loginUser.getUser().getUserPortrait();
+        String name = loginUser.getUser().getUserName();
+        Long id = loginUser.getUser().getId();
+        InfoVo infoVo = new InfoVo();
+        infoVo.setId(id);
+        infoVo.setName(name);
+        infoVo.setAvatar(avatar);
+        infoVo.setRoles(loginUser.getPermissions());
+        //TODO 从redis获取id，查询数据库获取用户信息
+
+        return new R(200,"登陆成功",infoVo);
     }
 }

@@ -1,5 +1,7 @@
 package com.jin.blog.sunset.system.filter;
 
+import com.jin.blog.sunset.base.cache.RedisService;
+import com.jin.blog.sunset.base.cache.RedisUserKey;
 import com.jin.blog.sunset.system.utils.JwtTokenUtil;
 import com.jin.blog.sunset.system.utils.LoginUser;
 import io.jsonwebtoken.Claims;
@@ -26,7 +28,7 @@ import java.util.Objects;
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisService redisService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
@@ -37,13 +39,15 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return ;
         }
         // TODO token存入redis
-        redisTemplate.opsForValue().set("username",JwtTokenUtil.getUsername(token));
+        //redisTemplate.opsForValue().set("username",JwtTokenUtil.getUsername(token));
+        redisService.setCache("username",JwtTokenUtil.getUsername(token));
         //解析Token
         Claims claims = JwtTokenUtil.checkJWT(token);
         String userid = claims.get("username",String.class);
         //TODO 将用户信息存入redis
-        String redisKey = "user"+userid;
-        LoginUser user = (LoginUser) redisTemplate.opsForValue().get(redisKey);
+        String key = RedisUserKey.getUserId(userid);
+        //LoginUser user = (LoginUser) redisTemplate.opsForValue().get(key);
+        LoginUser user = redisService.getCache(key,LoginUser.class);
         if(Objects.isNull(user)){
             throw new RuntimeException("用户未登录");
         }

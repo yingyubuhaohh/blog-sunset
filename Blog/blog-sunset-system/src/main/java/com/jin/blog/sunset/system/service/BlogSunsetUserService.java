@@ -18,6 +18,8 @@ public interface BlogSunsetUserService extends IService<BlogSunsetUser> {
 
     R login(LoginVo loginVo);
 
-    R info(InfoVo infoVo);
+    R info(String token);
+
+    R logout(String token);
 
 }

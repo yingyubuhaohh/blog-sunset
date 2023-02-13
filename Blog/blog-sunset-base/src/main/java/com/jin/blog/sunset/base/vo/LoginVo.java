@@ -1,4 +1,4 @@
-package com.jin.blog.sunset.core.vo;
+package com.jin.blog.sunset.base.vo;
 
 import lombok.Data;
 

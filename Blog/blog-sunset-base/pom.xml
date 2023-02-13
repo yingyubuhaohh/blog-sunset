@@ -18,6 +18,12 @@
     </properties>
 
     <dependencies>
+        <!-- sunset核心模块 -->
+        <dependency>
+            <groupId>com.jin</groupId>
+            <artifactId>blog-sunset-core</artifactId>
+        </dependency>
+        <!-- springboot启动器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>

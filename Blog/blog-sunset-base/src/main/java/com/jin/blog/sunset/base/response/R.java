@@ -14,9 +14,9 @@ public class R<T> implements Serializable {
     private static final long serialVersionUID = 7735505903525411467L;
 
     // 成功值
-    private static final int SUCCESS_CODE = 1;
+    private static final int SUCCESS_CODE = 200;
     // 失败值
-    private static final int ERROR_CODE = 0;
+    private static final int ERROR_CODE = 500;
 
     //状态码
     private int code;

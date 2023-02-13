@@ -1,8 +1,7 @@
 package com.jin.blog.sunset.system.controller.business;
 
 import com.jin.blog.sunset.base.response.R;
-import com.jin.blog.sunset.core.entity.BlogSunsetUser;
-import com.jin.blog.sunset.core.vo.LoginVo;
+import com.jin.blog.sunset.base.vo.LoginVo;
 import com.jin.blog.sunset.system.service.BlogSunsetUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

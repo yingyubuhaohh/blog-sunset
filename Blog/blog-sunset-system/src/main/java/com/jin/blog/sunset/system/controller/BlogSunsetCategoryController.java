@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jin.blog.sunset.base.response.R;
 import com.jin.blog.sunset.core.entity.BlogSunsetCategory;
+import com.jin.blog.sunset.base.vo.PageVo;
 import com.jin.blog.sunset.system.service.BlogSunsetCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -149,13 +150,12 @@ public class BlogSunsetCategoryController {
      * @Param
      * @return R
      **/
-    @GetMapping("/page")
+    @PostMapping("/page")
     @ApiOperation("分页查询")
-    public R findPage(@RequestParam Integer pageNum,
-    @RequestParam Integer pageSize) {
+    public R findPage(@RequestBody PageVo pageVo) {
         QueryWrapper<BlogSunsetCategory> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
-        return R.ok(targetService.page(new Page<>(pageNum, pageSize), queryWrapper));
+        queryWrapper.orderByAsc("id");
+        return R.ok(targetService.getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper));
     }
 }
 

@@ -4,6 +4,7 @@ package com.jin.blog.sunset.system.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jin.blog.sunset.base.response.R;
+import com.jin.blog.sunset.base.vo.PageVo;
 import com.jin.blog.sunset.core.entity.BlogSunsetUser;
 import com.jin.blog.sunset.system.service.BlogSunsetUserService;
 import io.swagger.annotations.Api;
@@ -149,13 +150,12 @@ public class BlogSunsetUserController {
      * @Param
      * @return R
      **/
-    @GetMapping("/page")
+    @PostMapping("/page")
     @ApiOperation("分页查询")
-    public R findPage(@RequestParam Integer pageNum,
-    @RequestParam Integer pageSize) {
+    public R findPage(@RequestBody PageVo pageVo) {
         QueryWrapper<BlogSunsetUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
-        return R.ok(targetService.page(new Page<>(pageNum, pageSize), queryWrapper));
+        return R.ok(targetService.getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper));
     }
 }
 

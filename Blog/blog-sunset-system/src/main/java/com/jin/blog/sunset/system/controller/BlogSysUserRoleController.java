@@ -60,15 +60,32 @@ public class BlogSysUserRoleController {
 
     /**
      * @Author jinzelei
-     * @Description  新增或更新
+     * @Description  新增
      * @Date  2023-02-03 15:49:41
      * @Param
      * @return R
      **/
     @PostMapping("/save")
-    @ApiOperation("新增或修改")
+    @ApiOperation("新增")
     public R save(@RequestBody BlogSysUserRole blogSysUserRole) {
         if(targetService.save(blogSysUserRole)){
+            return R.ok();
+        }else{
+            return R.error();
+        }
+    }
+
+    /**
+     * @Author jinzelei
+     * @Description  修改
+     * @Date  2023/2/14 16:42:50
+     * @Param BlogSysUserRole 实体参数
+     * @return R
+     **/
+    @PostMapping("/update")
+    @ApiOperation("修改")
+    public R update(@RequestBody BlogSysUserRole blogSysUserRole) {
+        if(targetService.update(blogSysUserRole,new QueryWrapper<>())){
             return R.ok();
         }else{
             return R.error();

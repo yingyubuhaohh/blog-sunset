@@ -7,6 +7,7 @@ import com.jin.blog.sunset.base.response.R;
 import com.jin.blog.sunset.base.vo.PageVo;
 import com.jin.blog.sunset.core.entity.BlogSunsetArticle;
 import com.jin.blog.sunset.core.entity.BlogSunsetComment;
+import com.jin.blog.sunset.core.entity.BlogSunsetTool;
 import com.jin.blog.sunset.system.service.BlogSunsetCommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -61,15 +62,32 @@ public class BlogSunsetCommentController {
 
     /**
      * @Author jinzelei
-     * @Description  新增或更新
+     * @Description  新增
      * @Date  2023-02-03 15:49:41
      * @Param
      * @return R
      **/
     @PostMapping("/save")
-    @ApiOperation("新增或修改")
+    @ApiOperation("新增")
     public R save(@RequestBody BlogSunsetComment blogSunsetComment) {
         if(targetService.save(blogSunsetComment)){
+            return R.ok();
+        }else{
+            return R.error();
+        }
+    }
+
+    /**
+     * @Author jinzelei
+     * @Description  修改
+     * @Date  2023/2/14 16:42:50
+     * @Param BlogSunsetComment 实体参数
+     * @return R
+     **/
+    @PostMapping("/update")
+    @ApiOperation("修改")
+    public R update(@RequestBody BlogSunsetComment blogSunsetComment) {
+        if(targetService.update(blogSunsetComment,new QueryWrapper<>())){
             return R.ok();
         }else{
             return R.error();

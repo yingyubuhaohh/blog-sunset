@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jin.blog.sunset.base.response.R;
 import com.jin.blog.sunset.base.vo.PageVo;
 import com.jin.blog.sunset.core.entity.BlogSunsetArticle;
+import com.jin.blog.sunset.core.entity.BlogSunsetCategory;
 import com.jin.blog.sunset.system.service.BlogSunsetArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -60,15 +61,32 @@ public class BlogSunsetArticleController {
 
     /**
      * @Author jinzelei
-     * @Description  新增或更新
+     * @Description  新增
      * @Date  2023-02-03 15:49:41
      * @Param
      * @return R
      **/
     @PostMapping("/save")
-    @ApiOperation("新增或修改")
+    @ApiOperation("新增")
     public R save(@RequestBody BlogSunsetArticle blogSunsetArticle) {
         if(targetService.save(blogSunsetArticle)){
+            return R.ok();
+        }else{
+            return R.error();
+        }
+    }
+
+    /**
+     * @Author jinzelei
+     * @Description  修改
+     * @Date  2023/2/14 16:42:50
+     * @Param BlogSunsetArticle 实体参数
+     * @return R
+     **/
+    @PostMapping("/update")
+    @ApiOperation("修改")
+    public R update(@RequestBody BlogSunsetArticle blogSunsetArticle) {
+        if(targetService.update(blogSunsetArticle,new QueryWrapper<>())){
             return R.ok();
         }else{
             return R.error();

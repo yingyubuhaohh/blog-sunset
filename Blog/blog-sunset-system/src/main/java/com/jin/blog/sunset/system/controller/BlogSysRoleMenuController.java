@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jin.blog.sunset.base.response.R;
 import com.jin.blog.sunset.base.vo.PageVo;
 import com.jin.blog.sunset.core.entity.BlogSysRoleMenu;
+import com.jin.blog.sunset.core.entity.BlogSysUserRole;
 import com.jin.blog.sunset.system.service.BlogSysRoleMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -60,15 +61,32 @@ public class BlogSysRoleMenuController {
 
     /**
      * @Author jinzelei
-     * @Description  新增或更新
+     * @Description  新增
      * @Date  2023-02-03 15:49:41
      * @Param
      * @return R
      **/
     @PostMapping("/save")
-    @ApiOperation("新增或修改")
+    @ApiOperation("新增")
     public R save(@RequestBody BlogSysRoleMenu blogSysRoleMenu) {
         if(targetService.save(blogSysRoleMenu)){
+            return R.ok();
+        }else{
+            return R.error();
+        }
+    }
+
+    /**
+     * @Author jinzelei
+     * @Description  修改
+     * @Date  2023/2/14 16:42:50
+     * @Param BlogSysRoleMenu 实体参数
+     * @return R
+     **/
+    @PostMapping("/update")
+    @ApiOperation("修改")
+    public R update(@RequestBody BlogSysRoleMenu blogSysRoleMenu) {
+        if(targetService.update(blogSysRoleMenu,new QueryWrapper<>())){
             return R.ok();
         }else{
             return R.error();

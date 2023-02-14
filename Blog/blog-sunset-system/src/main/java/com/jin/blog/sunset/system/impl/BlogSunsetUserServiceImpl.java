@@ -4,7 +4,7 @@ import com.jin.blog.sunset.base.cache.RedisService;
 import com.jin.blog.sunset.base.cache.RedisUserKey;
 import com.jin.blog.sunset.base.response.R;
 import com.jin.blog.sunset.core.entity.BlogSunsetUser;
-import com.jin.blog.sunset.core.impl.business.SunsetServiceImpl;
+import com.jin.blog.sunset.base.impl.SunsetServiceImpl;
 import com.jin.blog.sunset.core.mapper.BlogSunsetUserMapper;
 import com.jin.blog.sunset.base.vo.InfoVo;
 import com.jin.blog.sunset.base.vo.LoginVo;

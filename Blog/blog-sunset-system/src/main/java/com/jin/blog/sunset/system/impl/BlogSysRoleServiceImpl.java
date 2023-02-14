@@ -1,7 +1,7 @@
 package com.jin.blog.sunset.system.impl;
 
 import com.jin.blog.sunset.core.entity.BlogSysRole;
-import com.jin.blog.sunset.core.impl.business.SunsetServiceImpl;
+import com.jin.blog.sunset.base.impl.SunsetServiceImpl;
 import com.jin.blog.sunset.core.mapper.BlogSysRoleMapper;
 import com.jin.blog.sunset.system.service.BlogSysRoleService;
 import org.springframework.stereotype.Service;

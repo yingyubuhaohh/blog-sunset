@@ -153,9 +153,7 @@ public class BlogSysUserRoleController {
     @PostMapping("/page")
     @ApiOperation("分页查询")
     public R findPage(@RequestBody PageVo pageVo) {
-        QueryWrapper<BlogSysUserRole> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
-        return R.ok(targetService.getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper));
+        return R.ok(targetService.page(pageVo));
     }
 }
 

@@ -1,11 +1,15 @@
-package com.jin.blog.sunset.core.impl.business;
+package com.jin.blog.sunset.base.impl;
 
-import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.base.CaseFormat;
-import com.jin.blog.sunset.core.mapper.business.SunsetService;
+import com.jin.blog.sunset.base.service.SunsetService;
+import com.jin.blog.sunset.base.vo.PageVo;
+import com.jin.blog.sunset.core.entity.BlogSunsetArticle;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -20,6 +24,13 @@ import java.util.Map;
  **/
 public class SunsetServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,T> implements SunsetService<T> {
 
+    /**
+     * @Author jinzelei
+     * @Description  通用搜索方法
+     * @Date  2023/2/14 14:31:15
+     * @Param T 实体参数
+     * @return List 结果链表
+     **/
     @Override
     public List<T> searchObjs(T entity) throws IllegalAccessException {
         // 将对象转化为map
@@ -42,4 +53,15 @@ public class SunsetServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,
         }
         return this.getBaseMapper().selectList(queryWrapper);
     }
+
+    @Override
+    public Page<T> page(PageVo pageVo) {
+        QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByAsc("id");
+        getBaseMapper().selectObjs(queryWrapper);
+        return getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper);
+
+    }
+
+
 }

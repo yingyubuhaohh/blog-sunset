@@ -153,10 +153,7 @@ public class BlogSunsetArticleController {
     @PostMapping("/page")
     @ApiOperation("分页查询")
     public R findPage(@RequestBody PageVo pageVo){
-        QueryWrapper<BlogSunsetArticle> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByAsc("id");
-        targetService.getBaseMapper().selectObjs(queryWrapper);
-        return R.ok(targetService.getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper));
+        return R.ok(targetService.page(pageVo));
     }
 }
 

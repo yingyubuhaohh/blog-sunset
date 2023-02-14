@@ -3,7 +3,7 @@ package com.jin.blog.sunset.system.service;
 import com.jin.blog.sunset.base.response.R;
 import com.jin.blog.sunset.core.entity.BlogSunsetUser;
 import com.jin.blog.sunset.base.vo.LoginVo;
-import com.jin.blog.sunset.core.mapper.business.SunsetService;
+import com.jin.blog.sunset.base.service.SunsetService;
 
 /**
  * <p>

@@ -1,7 +1,7 @@
 package com.jin.blog.sunset.system.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.jin.blog.sunset.core.entity.BlogSunsetArticle;
+import com.jin.blog.sunset.core.mapper.business.SunsetService;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.jin.blog.sunset.core.entity.BlogSunsetArticle;
  * @author jinzelei
  * @since 2023-02-02 10:02:23
  */
-public interface BlogSunsetArticleService extends IService<BlogSunsetArticle> {
+public interface BlogSunsetArticleService extends SunsetService<BlogSunsetArticle> {
 
 }

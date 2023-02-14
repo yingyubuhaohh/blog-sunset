@@ -188,7 +188,11 @@
                 <artifactId>jsch</artifactId>
                 <version>0.1.54</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>21.0</version>
+            </dependency>
             <!--elasticsearch-->
             <!--<dependency>
                 <groupId>org.springframework.boot</groupId>

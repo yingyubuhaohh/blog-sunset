@@ -49,6 +49,13 @@ public class LoginController {
         return targetService.info(token);
     }
 
+    /**
+     * @Author jinzelei
+     * @Description  登出
+     * @Date  2023/2/13 15:18:30
+     * @Param token
+     * @return R
+     **/
     @PostMapping("/logout")
     @ApiOperation("登出")
     public R logout(@RequestBody String token){

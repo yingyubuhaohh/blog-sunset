@@ -1,9 +1,9 @@
 package com.jin.blog.sunset.system.impl;
 
 import com.jin.blog.sunset.core.entity.BlogSysRole;
+import com.jin.blog.sunset.core.impl.business.SunsetServiceImpl;
 import com.jin.blog.sunset.core.mapper.BlogSysRoleMapper;
 import com.jin.blog.sunset.system.service.BlogSysRoleService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2023-02-02 10:02:23
  */
 @Service
-public class BlogSysRoleServiceImpl extends ServiceImpl<BlogSysRoleMapper, BlogSysRole> implements BlogSysRoleService {
+public class BlogSysRoleServiceImpl extends SunsetServiceImpl<BlogSysRoleMapper, BlogSysRole> implements BlogSysRoleService {
 
 }

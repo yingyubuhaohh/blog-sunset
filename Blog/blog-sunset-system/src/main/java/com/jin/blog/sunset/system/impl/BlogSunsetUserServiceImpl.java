@@ -4,11 +4,11 @@ import com.jin.blog.sunset.base.cache.RedisService;
 import com.jin.blog.sunset.base.cache.RedisUserKey;
 import com.jin.blog.sunset.base.response.R;
 import com.jin.blog.sunset.core.entity.BlogSunsetUser;
+import com.jin.blog.sunset.core.impl.business.SunsetServiceImpl;
 import com.jin.blog.sunset.core.mapper.BlogSunsetUserMapper;
 import com.jin.blog.sunset.base.vo.InfoVo;
 import com.jin.blog.sunset.base.vo.LoginVo;
 import com.jin.blog.sunset.system.service.BlogSunsetUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jin.blog.sunset.system.utils.JwtTokenUtil;
 import com.jin.blog.sunset.system.utils.LoginUser;
 import io.jsonwebtoken.Claims;
@@ -31,7 +31,7 @@ import java.util.*;
  * @since 2023-02-02 10:02:23
  */
 @Service
-public class BlogSunsetUserServiceImpl extends ServiceImpl<BlogSunsetUserMapper, BlogSunsetUser> implements BlogSunsetUserService {
+public class BlogSunsetUserServiceImpl extends SunsetServiceImpl<BlogSunsetUserMapper, BlogSunsetUser> implements BlogSunsetUserService {
 
     @Autowired
     private AuthenticationManager authenticationManager;

@@ -157,5 +157,33 @@ public class BlogSunsetCategoryController {
         queryWrapper.orderByAsc("id");
         return R.ok(targetService.getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper));
     }
+
+    /**
+     * @Author jinzelei
+     * @Description  搜索接口
+     * @Date  2023/2/14 14:14:41
+     * @Param BlogSunsetCategory 博客分类实体
+     * @return R
+     **/
+    @PostMapping("/search")
+    @ApiOperation("搜索接口")
+    public R search(@RequestBody BlogSunsetCategory blogSunsetCategory) throws IllegalAccessException {
+        return R.ok(targetService.searchObjs(blogSunsetCategory));
+    }
+
+    /**
+     * @Author jinzelei
+     * @Description  通用业务测试接口
+     * @Date  2023/2/14 14:10:58
+     * @Param
+     * @return R
+     **/
+    @PostMapping("/test")
+    @ApiOperation("测试接口")
+    public R test() throws IllegalAccessException {
+        System.out.println(targetService.searchObjs(new BlogSunsetCategory().setCategoryName("V")));
+        return R.ok();
+    }
+
 }
 

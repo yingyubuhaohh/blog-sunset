@@ -65,7 +65,7 @@ public class BlogSunsetArticleController {
      * @Param
      * @return R
      **/
-    @PostMapping
+    @PostMapping("/save")
     @ApiOperation("新增或修改")
     public R save(@RequestBody BlogSunsetArticle blogSunsetArticle) {
         if(targetService.save(blogSunsetArticle)){
@@ -155,6 +155,7 @@ public class BlogSunsetArticleController {
     public R findPage(@RequestBody PageVo pageVo){
         QueryWrapper<BlogSunsetArticle> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByAsc("id");
+        targetService.getBaseMapper().selectObjs(queryWrapper);
         return R.ok(targetService.getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper));
     }
 }

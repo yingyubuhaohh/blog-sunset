@@ -1,9 +1,9 @@
 package com.jin.blog.sunset.system.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.jin.blog.sunset.base.response.R;
 import com.jin.blog.sunset.core.entity.BlogSunsetUser;
 import com.jin.blog.sunset.base.vo.LoginVo;
+import com.jin.blog.sunset.core.mapper.business.SunsetService;
 
 /**
  * <p>
@@ -13,7 +13,7 @@ import com.jin.blog.sunset.base.vo.LoginVo;
  * @author jinzelei
  * @since 2023-02-02 10:02:23
  */
-public interface BlogSunsetUserService extends IService<BlogSunsetUser> {
+public interface BlogSunsetUserService extends SunsetService<BlogSunsetUser> {
 
     R login(LoginVo loginVo);
 

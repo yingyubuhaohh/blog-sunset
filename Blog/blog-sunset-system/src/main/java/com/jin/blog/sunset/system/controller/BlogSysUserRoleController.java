@@ -65,7 +65,7 @@ public class BlogSysUserRoleController {
      * @Param
      * @return R
      **/
-    @PostMapping
+    @PostMapping("/save")
     @ApiOperation("新增或修改")
     public R save(@RequestBody BlogSysUserRole blogSysUserRole) {
         if(targetService.save(blogSysUserRole)){

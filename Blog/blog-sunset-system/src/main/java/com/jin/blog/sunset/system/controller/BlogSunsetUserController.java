@@ -65,7 +65,7 @@ public class BlogSunsetUserController {
      * @Param
      * @return R
      **/
-    @PostMapping
+    @PostMapping("/save")
     @ApiOperation("新增或修改")
     public R save(@RequestBody BlogSunsetUser blogSunsetUser) {
         if(targetService.save(blogSunsetUser)){

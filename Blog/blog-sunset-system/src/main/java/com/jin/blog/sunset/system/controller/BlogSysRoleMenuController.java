@@ -65,7 +65,7 @@ public class BlogSysRoleMenuController {
      * @Param
      * @return R
      **/
-    @PostMapping
+    @PostMapping("/save")
     @ApiOperation("新增或修改")
     public R save(@RequestBody BlogSysRoleMenu blogSysRoleMenu) {
         if(targetService.save(blogSysRoleMenu)){

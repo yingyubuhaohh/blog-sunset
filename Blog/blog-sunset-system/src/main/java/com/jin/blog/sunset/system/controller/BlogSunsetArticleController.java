@@ -86,7 +86,7 @@ public class BlogSunsetArticleController {
     @PostMapping("/update")
     @ApiOperation("修改")
     public R update(@RequestBody BlogSunsetArticle blogSunsetArticle) {
-        if(targetService.update(blogSunsetArticle,new QueryWrapper<>())){
+        if(targetService.update(blogSunsetArticle,new QueryWrapper<BlogSunsetArticle>().eq("id",blogSunsetArticle.getId()))){
             return R.ok();
         }else{
             return R.error();

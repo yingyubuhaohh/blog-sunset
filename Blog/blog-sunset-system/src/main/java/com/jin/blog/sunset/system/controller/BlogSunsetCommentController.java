@@ -87,7 +87,7 @@ public class BlogSunsetCommentController {
     @PostMapping("/update")
     @ApiOperation("修改")
     public R update(@RequestBody BlogSunsetComment blogSunsetComment) {
-        if(targetService.update(blogSunsetComment,new QueryWrapper<>())){
+        if(targetService.update(blogSunsetComment,new QueryWrapper<BlogSunsetComment>().eq("id",blogSunsetComment.getId()))){
             return R.ok();
         }else{
             return R.error();

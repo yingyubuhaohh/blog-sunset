@@ -86,7 +86,7 @@ public class BlogSysMenuController {
     @PostMapping("/update")
     @ApiOperation("修改")
     public R update(@RequestBody BlogSysMenu blogSysMenu) {
-        if(targetService.update(blogSysMenu,new QueryWrapper<>())){
+        if(targetService.update(blogSysMenu,new QueryWrapper<BlogSysMenu>().eq("id",blogSysMenu.getId()))){
             return R.ok();
         }else{
             return R.error();

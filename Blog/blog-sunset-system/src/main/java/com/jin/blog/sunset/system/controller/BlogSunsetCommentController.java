@@ -187,5 +187,18 @@ public class BlogSunsetCommentController {
     public R page(@RequestBody PageVo pageVo,@PathVariable String type){
         return R.ok(targetService.typePage(pageVo,type));
     }
+
+    /**
+     * @Author jinzelei
+     * @Description  搜索接口
+     * @Date  2023/2/16 09:32:38
+     * @Param [blogSunsetComment] 评论实体
+     * @return com.jin.blog.sunset.base.response.R
+     **/
+    @PostMapping("/search")
+    @ApiOperation("搜索接口")
+    public R search(@RequestBody BlogSunsetComment blogSunsetComment) throws IllegalAccessException {
+        return R.ok(targetService.searchObjs(blogSunsetComment));
+    }
 }
 

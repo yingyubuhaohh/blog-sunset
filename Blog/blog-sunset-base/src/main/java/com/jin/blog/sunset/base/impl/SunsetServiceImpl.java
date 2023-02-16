@@ -1,15 +1,13 @@
 package com.jin.blog.sunset.base.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.base.CaseFormat;
 import com.jin.blog.sunset.base.service.SunsetService;
 import com.jin.blog.sunset.base.vo.PageVo;
-import com.jin.blog.sunset.core.entity.BlogSunsetArticle;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -38,7 +36,8 @@ public class SunsetServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,
         Field[] fields = entity.getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
-            if(field.get(entity) != null){
+            // 去除value为空的键值对
+            if(ObjectUtils.isNotEmpty(field.get(entity))){
                 map.put(field.getName(), field.get(entity));
             }
         }

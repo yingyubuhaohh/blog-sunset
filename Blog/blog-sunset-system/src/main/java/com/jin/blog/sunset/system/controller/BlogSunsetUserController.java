@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jin.blog.sunset.base.response.R;
 import com.jin.blog.sunset.base.vo.PageVo;
+import com.jin.blog.sunset.core.entity.BlogSunsetTool;
 import com.jin.blog.sunset.core.entity.BlogSunsetUser;
 import com.jin.blog.sunset.core.entity.BlogSysMenu;
 import com.jin.blog.sunset.system.service.BlogSunsetUserService;
@@ -172,6 +173,19 @@ public class BlogSunsetUserController {
     @ApiOperation("分页查询")
     public R findPage(@RequestBody PageVo pageVo) {
         return R.ok(targetService.page(pageVo));
+    }
+
+    /**
+     * @Author jinzelei
+     * @Description 搜索接口
+     * @Date  2023/2/16 09:34:34
+     * @Param [blogSunsetUser] 实体参数
+     * @return com.jin.blog.sunset.base.response.R
+     **/
+    @PostMapping("/search")
+    @ApiOperation("搜索接口")
+    public R search(@RequestBody BlogSunsetUser blogSunsetUser) throws IllegalAccessException {
+        return R.ok(targetService.searchObjs(blogSunsetUser));
     }
 }
 

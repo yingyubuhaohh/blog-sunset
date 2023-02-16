@@ -70,7 +70,7 @@ public class BlogSunsetUserServiceImpl extends SunsetServiceImpl<BlogSunsetUserM
         //获得对应的Key
         String key = RedisUserKey.getUserId(userid);
         //存入redis中
-        redisService.setCache(key,loginUser);
+        //redisService.setCache(key,loginUser);
 
         return new R(200,"登陆成功",map);
     }

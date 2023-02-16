@@ -134,7 +134,7 @@ public class BlogSunsetToolController {
      * @Param id 删除文章id
      * @return R
      **/
-    @PostMapping("/remove/{id}")
+    @GetMapping("/remove/{id}")
     @ApiOperation("逻辑删除")
     public R remove(@PathVariable Long id){
         if(targetService.updateById(new BlogSunsetTool().setId(id).setIsDelete(1))){

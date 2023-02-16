@@ -57,10 +57,9 @@ public class SunsetServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,
     @Override
     public Page<T> page(PageVo pageVo) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("is_delete",0);
         queryWrapper.orderByAsc("id");
-        getBaseMapper().selectObjs(queryWrapper);
         return getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper);
-
     }
 
 

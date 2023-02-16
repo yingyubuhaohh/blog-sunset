@@ -135,7 +135,7 @@ public class BlogSunsetCommentController {
      * @Param id 删除文章id
      * @return R
      **/
-    @PostMapping("/remove/{id}")
+    @GetMapping("/remove/{id}")
     @ApiOperation("逻辑删除")
     public R remove(@PathVariable Long id){
         if(targetService.updateById(new BlogSunsetComment().setId(id).setIsDelete(1))){
@@ -173,6 +173,19 @@ public class BlogSunsetCommentController {
     @ApiOperation("分页查询")
     public R findPage(@RequestBody PageVo pageVo) {
         return R.ok(targetService.page(pageVo));
+    }
+
+    /**
+     * @Author jinzelei
+     * @Description
+     * @Date  2023/2/15 11:57:26
+     * @Param PageVo type
+     * @return R
+     **/
+    @PostMapping("/page/{type}")
+    @ApiOperation("type分页查询")
+    public R page(@RequestBody PageVo pageVo,@PathVariable String type){
+        return R.ok(targetService.typePage(pageVo,type));
     }
 }
 

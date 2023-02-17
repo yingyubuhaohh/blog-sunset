@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-03 17:57:14
+ * @since 2023-02-17 11:01:56
  */
 @Mapper
 public interface BlogSunsetToolMapper extends BaseMapper<BlogSunsetTool> {

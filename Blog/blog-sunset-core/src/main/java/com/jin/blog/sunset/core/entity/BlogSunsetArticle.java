@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -18,7 +20,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-03 17:57:14
+ * @since 2023-02-17 11:01:55
  */
 @Getter
 @Setter
@@ -69,7 +71,8 @@ public class BlogSunsetArticle implements Serializable {
 
     @ApiModelProperty("发表日期")
     @TableField("create_time")
-    private LocalDateTime createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    private Date createTime;
 
     @ApiModelProperty("是否删除")
     @TableField("is_delete")

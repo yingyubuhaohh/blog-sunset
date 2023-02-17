@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -18,7 +20,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-03 17:57:14
+ * @since 2023-02-17 11:01:56
  */
 @Getter
 @Setter
@@ -57,8 +59,9 @@ public class BlogSunsetComment implements Serializable {
     private String content;
 
     @ApiModelProperty("评论日期")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @TableField("date")
-    private LocalDateTime date;
+    private Date date;
 
     @ApiModelProperty("1:已审核 0：未审核")
     @TableField("status")

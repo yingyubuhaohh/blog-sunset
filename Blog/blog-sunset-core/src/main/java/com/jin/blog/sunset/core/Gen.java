@@ -170,6 +170,9 @@ class MySqlTypeConvertCustom extends MySqlTypeConvert implements ITypeConvert{
         if (t.contains("tinyint(1)")) {
             return DbColumnType.INTEGER;
         }
+        if(t.contains("datetime")){
+            return DbColumnType.DATE;
+        }
         return super.processTypeConvert(globalConfig, fieldType);
     }
 }

@@ -70,7 +70,7 @@ public class BlogSunsetUserServiceImpl extends SunsetServiceImpl<BlogSunsetUserM
         //获得对应的Key
         String key = RedisUserKey.getUserId(userid);
         //存入redis中
-        //redisService.setCache(key,loginUser);
+        redisService.setCache(key,loginUser);
 
         return new R(200,"登陆成功",map);
     }
@@ -82,32 +82,50 @@ public class BlogSunsetUserServiceImpl extends SunsetServiceImpl<BlogSunsetUserM
      **/
     public R logout(String token){
         Claims claims = JwtTokenUtil.checkJWT(token);
-        String id = claims.getId();
+        String id = claims.get("username",String.class);
         String key = RedisUserKey.getUserId(id);
         Boolean cache = redisService.removeCache(key);
         if (cache){
-            return new R(200,"登陆成功",null);
+            return new R(200,"注销成功",null);
         }else {
             return new R(200,"网络错误",null);
         }
     }
 
+
+
+    /**
+     * @Author jinzelei
+     * @Description  获取用户登录信息
+     * @Date  2023/2/17 09:11:42
+     * @Param [token]
+     * @return com.jin.blog.sunset.base.response.R
+     **/
     @Override
     public R info(String token) {
-        //获取SecurityContextHolder中的用户id
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-        Collection<? extends GrantedAuthority> authorities = loginUser.getAuthorities();
-        String avatar = loginUser.getUser().getUserPortrait();
-        String name = loginUser.getUser().getUserName();
-        Long id = loginUser.getUser().getId();
         InfoVo infoVo = new InfoVo();
-        infoVo.setId(id);
-        infoVo.setName(name);
-        infoVo.setAvatar(avatar);
+        LoginUser loginUser = new LoginUser();
+        try{
+            //从redis获取id，查询数据库获取用户信息
+            Claims claims = JwtTokenUtil.checkJWT(token);
+            String redisId = claims.get("username",String.class);
+            String redisKey = RedisUserKey.getUserId(redisId);
+            loginUser = redisService.getCache(redisKey, LoginUser.class);
+            System.out.println(loginUser.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+            //获取SecurityContextHolder中的用户id
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            loginUser = (LoginUser) authentication.getPrincipal();
+            Collection<? extends GrantedAuthority> authorities = loginUser.getAuthorities();
+            String avatar = loginUser.getUser().getUserPortrait();
+            String name = loginUser.getUser().getUserName();
+            Long id = loginUser.getUser().getId();
+        }
+        infoVo.setId(loginUser.getUser().getId());
+        infoVo.setName(loginUser.getUser().getUserName());
+        infoVo.setAvatar(loginUser.getUser().getUserPortrait());
         infoVo.setRoles(loginUser.getPermissions());
-        //TODO 从redis获取id，查询数据库获取用户信息
-
         return new R(200,"登陆成功",infoVo);
     }
 }

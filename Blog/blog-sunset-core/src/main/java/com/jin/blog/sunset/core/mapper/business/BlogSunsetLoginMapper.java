@@ -19,15 +19,13 @@ public interface BlogSunsetLoginMapper extends BaseMapper<BlogSunsetUser> {
     @Select("select * from blog_sunset_user where user_name = #{username}")
     BlogSunsetUser selectUserByUsername(String username);
 
-    @Select("SELECT DISTINCT\n" +
-            "\tmenu_name \n" +
+    @Select("SELECT\n" +
+            "\trole_name \n" +
             "FROM\n" +
             "\tblog_sys_user_role ur\n" +
-            "\tLEFT JOIN blog_sys_role r ON ur.role_id = r.id\n" +
-            "\tLEFT JOIN blog_sys_role_menu rm ON rm.role_id = r.id\n" +
-            "\tLEFT JOIN blog_sys_menu m ON m.id = rm.menu_id \n" +
+            "\tLEFT JOIN blog_sys_role r ON ur.role_id = r.id \n" +
             "WHERE\n" +
-            "\tuser_id = 1")
+            "\tuser_id = #{id}")
     List<String> selectPermsByUserId(Long id);
 
 }

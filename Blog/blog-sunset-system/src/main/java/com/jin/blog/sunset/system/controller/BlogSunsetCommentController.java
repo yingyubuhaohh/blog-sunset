@@ -171,7 +171,7 @@ public class BlogSunsetCommentController {
      **/
     @PostMapping("/page")
     @ApiOperation("分页查询")
-    public R findPage(@RequestBody PageVo pageVo) {
+    public R findPage(@RequestBody PageVo<BlogSunsetComment> pageVo) {
         return R.ok(targetService.page(pageVo));
     }
 
@@ -184,21 +184,9 @@ public class BlogSunsetCommentController {
      **/
     @PostMapping("/page/{type}")
     @ApiOperation("type分页查询")
-    public R page(@RequestBody PageVo pageVo,@PathVariable String type){
+    public R page(@RequestBody PageVo<BlogSunsetComment> pageVo,@PathVariable String type){
         return R.ok(targetService.typePage(pageVo,type));
     }
 
-    /**
-     * @Author jinzelei
-     * @Description  搜索接口
-     * @Date  2023/2/16 09:32:38
-     * @Param [blogSunsetComment] 评论实体
-     * @return com.jin.blog.sunset.base.response.R
-     **/
-    @PostMapping("/search")
-    @ApiOperation("搜索接口")
-    public R search(@RequestBody BlogSunsetComment blogSunsetComment) throws IllegalAccessException {
-        return R.ok(targetService.searchObjs(blogSunsetComment));
-    }
 }
 

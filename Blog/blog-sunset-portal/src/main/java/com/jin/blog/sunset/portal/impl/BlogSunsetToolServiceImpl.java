@@ -1,5 +1,6 @@
 package com.jin.blog.sunset.portal.impl;
 
+import com.jin.blog.sunset.base.impl.SunsetServiceImpl;
 import com.jin.blog.sunset.core.entity.BlogSunsetTool;
 import com.jin.blog.sunset.core.mapper.BlogSunsetToolMapper;
 import com.jin.blog.sunset.portal.service.BlogSunsetToolService;
@@ -15,6 +16,6 @@ import org.springframework.stereotype.Service;
  * @since 2023-02-02 10:02:06
  */
 @Service
-public class BlogSunsetToolServiceImpl extends ServiceImpl<BlogSunsetToolMapper, BlogSunsetTool> implements BlogSunsetToolService {
+public class BlogSunsetToolServiceImpl extends SunsetServiceImpl<BlogSunsetToolMapper, BlogSunsetTool> implements BlogSunsetToolService {
 
 }

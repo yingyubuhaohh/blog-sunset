@@ -170,7 +170,7 @@ public class BlogSysUserRoleController {
      **/
     @PostMapping("/page")
     @ApiOperation("分页查询")
-    public R findPage(@RequestBody PageVo pageVo) {
+    public R findPage(@RequestBody PageVo<BlogSysUserRole> pageVo) {
         return R.ok(targetService.page(pageVo));
     }
 
@@ -184,7 +184,7 @@ public class BlogSysUserRoleController {
     @PostMapping("/search")
     @ApiOperation("搜索接口")
     public R search(@RequestBody BlogSysUserRole blogSysUserRole) throws IllegalAccessException {
-        return R.ok(targetService.searchObjs(blogSysUserRole));
+        return R.ok();
     }
 }
 

@@ -104,23 +104,18 @@ public class BlogSunsetUserServiceImpl extends SunsetServiceImpl<BlogSunsetUserM
     @Override
     public R info(String token) {
         InfoVo infoVo = new InfoVo();
-        LoginUser loginUser = new LoginUser();
+        LoginUser loginUser = null;
         try{
             //从redis获取id，查询数据库获取用户信息
             Claims claims = JwtTokenUtil.checkJWT(token);
             String redisId = claims.get("username",String.class);
             String redisKey = RedisUserKey.getUserId(redisId);
             loginUser = redisService.getCache(redisKey, LoginUser.class);
-            System.out.println(loginUser.toString());
         }catch (Exception e){
             e.printStackTrace();
             //获取SecurityContextHolder中的用户id
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             loginUser = (LoginUser) authentication.getPrincipal();
-            Collection<? extends GrantedAuthority> authorities = loginUser.getAuthorities();
-            String avatar = loginUser.getUser().getUserPortrait();
-            String name = loginUser.getUser().getUserName();
-            Long id = loginUser.getUser().getId();
         }
         infoVo.setId(loginUser.getUser().getId());
         infoVo.setName(loginUser.getUser().getUserName());

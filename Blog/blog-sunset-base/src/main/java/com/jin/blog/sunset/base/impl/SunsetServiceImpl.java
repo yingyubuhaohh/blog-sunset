@@ -30,9 +30,9 @@ public class SunsetServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,
      * @return List 结果链表
      **/
     @Override
-    public List<T> searchObjs(T entity) throws IllegalAccessException {
+    public Page<T> searchObjs(T entity,PageVo pageVo) throws IllegalAccessException {
         // 将对象转化为map
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         Field[] fields = entity.getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
@@ -50,14 +50,44 @@ public class SunsetServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,
                 queryWrapper.like(column,map.get(key));
             }
         }
-        return this.getBaseMapper().selectList(queryWrapper);
+        return this.getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()),queryWrapper);
     }
 
+
+    /**
+     * @Author jinzelei
+     * @Description  分页搜索功能
+     * @Date  2023/2/16 10:39:05
+     * @Param [pageVo]
+     * @return com.baomidou.mybatisplus.extension.plugins.pagination.Page<T>
+     **/
     @Override
     public Page<T> page(PageVo pageVo) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("is_delete",0);
         queryWrapper.orderByAsc("id");
+        // 将对象转化为map
+        Map<String, Object> map = new HashMap<>();
+        Field[] fields = pageVo.getParams().getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            // 去除value为空的键值对
+            try {
+                if(ObjectUtils.isNotEmpty(field.get(pageVo.getParams()))){
+                    map.put(field.getName(), field.get(pageVo.getParams()));
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        // 创建wrapper
+        for(String key: map.keySet()){
+            if(!"serialVersionUID".equals(key)){
+                // 字符串驼峰转下划线
+                String column = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, key);
+                queryWrapper.like(column,map.get(key));
+            }
+        }
         return getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper);
     }
 

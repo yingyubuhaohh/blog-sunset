@@ -170,7 +170,7 @@ public class BlogSunsetCategoryController {
      **/
     @PostMapping("/page")
     @ApiOperation("分页查询")
-    public R findPage(@RequestBody PageVo pageVo) {
+    public R findPage(@RequestBody PageVo<BlogSunsetCategory> pageVo) {
         return R.ok(targetService.page(pageVo));
     }
 
@@ -183,8 +183,8 @@ public class BlogSunsetCategoryController {
      **/
     @PostMapping("/search")
     @ApiOperation("搜索接口")
-    public R search(@RequestBody BlogSunsetCategory blogSunsetCategory) throws IllegalAccessException {
-        return R.ok(targetService.searchObjs(blogSunsetCategory));
+    public R search(@RequestBody PageVo<BlogSunsetCategory> pageVo) throws IllegalAccessException {
+        return R.ok();
     }
 
     /**
@@ -197,7 +197,7 @@ public class BlogSunsetCategoryController {
     @PostMapping("/test")
     @ApiOperation("测试接口")
     public R test() throws IllegalAccessException {
-        System.out.println(targetService.searchObjs(new BlogSunsetCategory().setCategoryName("V")));
+        // System.out.println(targetService.searchObjs(new BlogSunsetCategory().setCategoryName("V")));
         return R.ok();
     }
 

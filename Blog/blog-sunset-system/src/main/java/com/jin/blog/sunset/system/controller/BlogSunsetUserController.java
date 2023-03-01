@@ -171,7 +171,7 @@ public class BlogSunsetUserController {
      **/
     @PostMapping("/page")
     @ApiOperation("分页查询")
-    public R findPage(@RequestBody PageVo pageVo) {
+    public R findPage(@RequestBody PageVo<BlogSunsetUser> pageVo) {
         return R.ok(targetService.page(pageVo));
     }
 
@@ -185,7 +185,7 @@ public class BlogSunsetUserController {
     @PostMapping("/search")
     @ApiOperation("搜索接口")
     public R search(@RequestBody BlogSunsetUser blogSunsetUser) throws IllegalAccessException {
-        return R.ok(targetService.searchObjs(blogSunsetUser));
+        return R.ok();
     }
 }
 

@@ -171,22 +171,9 @@ public class BlogSunsetToolController {
      **/
     @PostMapping("/page")
     @ApiOperation("分页查询")
-    public R findPage(@RequestBody PageVo pageVo) {
+    public R findPage(@RequestBody PageVo<BlogSunsetTool> pageVo) {
         return R.ok(targetService.page(pageVo));
     }
 
-
-    /**
-     * @Author jinzelei
-     * @Description  搜索接口
-     * @Date  2023/2/16 09:33:39
-     * @Param [blogSunsetTool] 实体参数
-     * @return com.jin.blog.sunset.base.response.R
-     **/
-    @PostMapping("/search")
-    @ApiOperation("搜索接口")
-    public R search(@RequestBody BlogSunsetTool blogSunsetTool) throws IllegalAccessException {
-        return R.ok(targetService.searchObjs(blogSunsetTool));
-    }
 }
 

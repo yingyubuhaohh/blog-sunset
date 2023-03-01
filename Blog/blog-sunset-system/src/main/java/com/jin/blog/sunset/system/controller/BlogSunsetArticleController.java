@@ -136,8 +136,8 @@ public class BlogSunsetArticleController {
      **/
     @GetMapping("/remove/{id}")
     @ApiOperation("逻辑删除")
-    public R remove(@PathVariable Long id){
-        if(targetService.updateById(new BlogSunsetArticle().setId(id).setIsDelete(1))){
+    public R remove(@PathVariable Integer id){
+        if(targetService.updateById(new BlogSunsetArticle().setId(Long.valueOf(id)).setIsDelete(1))){
             return R.ok();
         }else{
             return R.error();
@@ -170,22 +170,9 @@ public class BlogSunsetArticleController {
      **/
     @PostMapping("/page")
     @ApiOperation("分页查询")
-    public R findPage(@RequestBody PageVo pageVo){
+    public R findPage(@RequestBody PageVo<BlogSunsetArticle> pageVo){
         return R.ok(targetService.page(pageVo));
     }
 
-
-    /**
-     * @Author jinzelei
-     * @Description  搜索接口
-     * @Date  2023/2/16 09:31:08
-     * @Param [blogSunsetArticle] 实体参数
-     * @return com.jin.blog.sunset.base.response.R
-     **/
-    @PostMapping("/search")
-    @ApiOperation("搜索接口")
-    public R search(@RequestBody BlogSunsetArticle blogSunsetArticle) throws IllegalAccessException {
-        return R.ok(targetService.searchObjs(blogSunsetArticle));
-    }
 }
 

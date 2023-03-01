@@ -14,7 +14,7 @@ import java.util.List;
  **/
 public interface SunsetService<T> extends IService<T>{
 
-   List<T> searchObjs(T baseVo) throws IllegalAccessException;
+   Page<T> searchObjs(T baseVo,PageVo pageVo) throws IllegalAccessException;
 
    Page<T> page(PageVo pageVo);
 

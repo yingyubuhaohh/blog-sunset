@@ -2,10 +2,13 @@ package com.jin.blog.sunset.system.handler;
 
 import com.jin.blog.sunset.base.response.R;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -27,8 +30,10 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)  //针对全部异常
+    @ResponseStatus(HttpStatus.OK)
     public R exceptionHandler(HttpServletRequest request, Exception e){
         log.error("全局异常:"+e.getMessage());
+        e.printStackTrace();
         return R.error("服务端异常，请联系管理员");
     }
 

@@ -171,7 +171,7 @@ public class BlogSysMenuController {
      **/
     @PostMapping("/page")
     @ApiOperation("分页查询")
-    public R findPage(@RequestBody PageVo pageVo) {
+    public R findPage(@RequestBody PageVo<BlogSysMenu> pageVo) {
         return R.ok(targetService.page(pageVo));
     }
 
@@ -185,7 +185,7 @@ public class BlogSysMenuController {
     @PostMapping("/search")
     @ApiOperation("搜索接口")
     public R search(@RequestBody BlogSysMenu blogSysMenu) throws IllegalAccessException {
-        return R.ok(targetService.searchObjs(blogSysMenu));
+        return R.ok();
     }
 }
 

@@ -71,5 +71,18 @@ public class BlogSunsetCommentController {
         return R.ok(targetService.page(pageVo));
     }
 
+    /**
+     * @Author jinzelei
+     * @Description  根据文章id查询评论
+     * @Date  2023/3/1 17:04:23
+     * @Param [id]
+     * @return com.jin.blog.sunset.base.response.R
+     **/
+    @GetMapping("/findComment/{id}")
+    @ApiOperation("根据文章id查询评论")
+    public R findArticleComment(@PathVariable Integer id){
+        return R.ok(targetService.findArticleComment(id));
+    }
+
 }
 

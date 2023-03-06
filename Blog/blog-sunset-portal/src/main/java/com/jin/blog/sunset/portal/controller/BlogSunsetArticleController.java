@@ -1,6 +1,5 @@
 package com.jin.blog.sunset.portal.controller;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jin.blog.sunset.base.response.R;
@@ -11,9 +10,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -55,6 +51,14 @@ public class BlogSunsetArticleController {
     @GetMapping("/{id}")
     @ApiOperation("根据id查询")
     public R findOne(@PathVariable Integer id) {
+        // 文章访问量＋1
+        try {
+            BlogSunsetArticle article = targetService.getById(id);
+            targetService.updateById(article.setClickNum(article.getClickNum() + 1));
+        }catch (Exception e){
+            e.printStackTrace();
+            System.err.println("增加点击量失败！！");
+        }
         return R.ok(targetService.getById(id));
     }
 
@@ -68,7 +72,10 @@ public class BlogSunsetArticleController {
     @PostMapping("/page")
     @ApiOperation("分页查询")
     public R findPage(@RequestBody PageVo<BlogSunsetArticle> pageVo){
-        return R.ok(targetService.page(pageVo));
+        QueryWrapper<BlogSunsetArticle> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("create_time");
+        queryWrapper.eq("is_delete",0);
+        return R.ok(targetService.getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper));
     }
 
 }

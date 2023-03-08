@@ -9,11 +9,10 @@ import com.google.common.base.CaseFormat;
 import com.jin.blog.sunset.base.service.SunsetService;
 import com.jin.blog.sunset.base.strategy.Context;
 import com.jin.blog.sunset.base.vo.PageVo;
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +22,9 @@ import java.util.Map;
  * @date: 2023/2/14 9:08
  **/
 public class SunsetServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,T> implements SunsetService<T> {
+
+    @Autowired
+    private Context context;
 
     /**
      * @Author jinzelei
@@ -101,7 +103,7 @@ public class SunsetServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,
                     queryWrapper.orderByDesc(column);
                 }*/
                 // 方式二 策略模式
-                Context.useStrategy(strings,map.get(key).toString(),queryWrapper);
+                context.useStrategy(strings,map.get(key).toString(),queryWrapper);
             }
         }
         return getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper);

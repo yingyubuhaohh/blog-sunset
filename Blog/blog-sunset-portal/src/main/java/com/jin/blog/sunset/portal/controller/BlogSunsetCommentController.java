@@ -12,6 +12,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,6 +85,25 @@ public class BlogSunsetCommentController {
     @ApiOperation("根据文章id查询评论")
     public R findArticleComment(@PathVariable Integer id){
         return R.ok(targetService.findArticleComment(id));
+    }
+
+
+    /**
+     * @Author jinzelei
+     * @Description
+     * @Date  2023/3/6 16:47:36
+     * @Param [blogSunsetComment]
+     * @return com.jin.blog.sunset.base.response.R
+     **/
+    @PostMapping("/save")
+    @ApiOperation("新增")
+    public R save(@RequestBody BlogSunsetComment blogSunsetComment) {
+        LocalDateTime time1 = LocalDateTime.now();
+        if(targetService.save(blogSunsetComment.setDate(Date.from(time1.atZone(ZoneId.systemDefault()).toInstant())))){
+            return R.ok();
+        }else{
+            return R.error();
+        }
     }
 
 }

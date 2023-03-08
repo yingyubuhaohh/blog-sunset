@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.base.CaseFormat;
 import com.jin.blog.sunset.base.service.SunsetService;
+import com.jin.blog.sunset.base.strategy.Context;
 import com.jin.blog.sunset.base.vo.PageVo;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -65,10 +67,9 @@ public class SunsetServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,
     public Page<T> page(PageVo pageVo) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("is_delete",0);
-        queryWrapper.orderByAsc("id");
         // 将对象转化为map
-        Map<String, Object> map = new HashMap<>();
-        Field[] fields = pageVo.getParams().getClass().getDeclaredFields();
+        Map<String, Object> map = pageVo.getParams();
+        /*Field[] fields = pageVo.getParams().getClass().getFields();
         for (Field field : fields) {
             field.setAccessible(true);
             // 去除value为空的键值对
@@ -79,13 +80,28 @@ public class SunsetServiceImpl<M extends BaseMapper<T>,T> extends ServiceImpl<M,
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         // 创建wrapper
         for(String key: map.keySet()){
+            // 排除serialVersionUID属性
             if(!"serialVersionUID".equals(key)){
+                // 将字符串分割
+                String[] strings = key.split("_");
                 // 字符串驼峰转下划线
-                String column = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, key);
-                queryWrapper.like(column,map.get(key));
+                strings[0] = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, strings[0]);
+                // 判断后缀
+                // 方式一 if else
+                /*if(strings.length == 1){
+                    queryWrapper.eq(column,map.get(key));
+                }else if("like".equalsIgnoreCase(strings[1])){
+                    queryWrapper.like(column,map.get(key));
+                }else if("asc".equalsIgnoreCase(strings[1])){
+                    queryWrapper.orderByAsc(column);
+                }else if("desc".equalsIgnoreCase(strings[1])){
+                    queryWrapper.orderByDesc(column);
+                }*/
+                // 方式二 策略模式
+                Context.useStrategy(strings,map.get(key).toString(),queryWrapper);
             }
         }
         return getBaseMapper().selectPage(new Page<>(pageVo.getPageNum(), pageVo.getPageSize()), queryWrapper);

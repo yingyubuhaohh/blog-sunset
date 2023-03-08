@@ -3,6 +3,7 @@ package com.jin.blog.sunset.base.vo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * @Description 封装分页参数vo
@@ -14,5 +15,5 @@ import java.io.Serializable;
 public class PageVo<T> implements Serializable {
     private Integer pageNum;
     private Integer pageSize;
-    private T params;
+    private HashMap<String,Object> params;
 }

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-17 11:01:56
+ * @since 2023-03-08 14:53:56
  */
 public interface BlogSunsetToolService extends IService<BlogSunsetTool> {
 

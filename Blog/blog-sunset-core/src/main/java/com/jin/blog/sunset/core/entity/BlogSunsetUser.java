@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -20,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-17 11:01:56
+ * @since 2023-03-08 14:53:56
  */
 @Getter
 @Setter
@@ -52,7 +50,6 @@ public class BlogSunsetUser implements Serializable {
 
     @ApiModelProperty("最后登录时间")
     @TableField("login_last_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private Date loginLastTime;
 
     @ApiModelProperty("头像")

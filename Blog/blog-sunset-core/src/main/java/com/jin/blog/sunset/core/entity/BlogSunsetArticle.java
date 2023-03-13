@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -20,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-17 11:01:55
+ * @since 2023-03-08 14:53:56
  */
 @Getter
 @Setter
@@ -36,7 +34,7 @@ public class BlogSunsetArticle implements Serializable {
 
     @ApiModelProperty("用户id，外键")
     @TableField("user")
-    private Integer user;
+    private String user;
 
     @TableField("catalog")
     private Integer catalog;
@@ -67,11 +65,10 @@ public class BlogSunsetArticle implements Serializable {
 
     @ApiModelProperty("文章分类id")
     @TableField("category_id")
-    private Integer categoryId;
+    private String categoryId;
 
     @ApiModelProperty("发表日期")
     @TableField("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private Date createTime;
 
     @ApiModelProperty("是否删除")

@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-17 11:01:56
+ * @since 2023-03-08 14:53:56
  */
 @Getter
 @Setter
@@ -58,7 +58,7 @@ public class BlogSunsetTool implements Serializable {
     @TableField("is_delete")
     private Integer isDelete;
 
-    @ApiModelProperty("下载地址")
+    @ApiModelProperty("下载路径")
     @TableField("download")
     private String download;
 

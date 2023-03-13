@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author jinzelei
- * @since 2023-02-17 11:01:56
+ * @since 2023-03-08 14:53:56
  */
 @Service
 public class BlogSysUserRoleServiceImpl extends ServiceImpl<BlogSysUserRoleMapper, BlogSysUserRole> implements BlogSysUserRoleService {

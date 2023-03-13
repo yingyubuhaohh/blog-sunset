@@ -33,9 +33,9 @@ public class Gen {
 
 
         DataSourceConfig dsc = new DataSourceConfig
-                .Builder("jdbc:mysql://localhost:3306/blog_sunset?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=UTF-8",
+                .Builder("jdbc:mysql://150.158.172.107:3306/blog_sunset?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=UTF-8",
                 "root",
-                "123456")
+                "Jinzelei+2022")
                 .dbQuery(mySqlQuery)
                 .typeConvert(new MySqlTypeConvertCustom())
                 .build();

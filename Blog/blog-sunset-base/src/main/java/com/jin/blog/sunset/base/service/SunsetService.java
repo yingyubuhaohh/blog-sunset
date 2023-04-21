@@ -3,8 +3,7 @@ package com.jin.blog.sunset.base.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jin.blog.sunset.base.vo.PageVo;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Description 通用服务层方法接口
@@ -14,8 +13,10 @@ import java.util.List;
  **/
 public interface SunsetService<T> extends IService<T>{
 
+   @Transactional
    Page<T> searchObjs(T baseVo,PageVo pageVo) throws IllegalAccessException;
 
+   @Transactional
    Page<T> page(PageVo pageVo);
 
 }

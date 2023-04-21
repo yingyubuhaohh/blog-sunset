@@ -23,26 +23,127 @@
         </dependency>
     </dependencies>
 
-    <build>
+    <!--<build>
+        <plugins>
+            &lt;!&ndash; 此插件必须放在父 POM 中  &ndash;&gt;
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            &lt;!&ndash;
+                            设置将依赖整合到一个自定义名称的 JAR 包。
+                            如果不设置此项，依赖将整合到 Maven 无插件时的默认 JAR 包，并生成一个前缀为 original- 的无依赖 JAR 包
+                             &ndash;&gt;
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            &lt;!&ndash; 设置生成的 JAR 包后缀名 &ndash;&gt;
+                            <shadedClassifierName>shaded-with-dependencies</shadedClassifierName>
+                            &lt;!&ndash; 设置程序运行入口 &ndash;&gt;
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.jin.blog.sunset.portal.SunsetPortalApplication</mainClass>
+                                </transformer>
+                            </transformers>
+                            &lt;!&ndash; 设置 JAR 包输出目录 &ndash;&gt;
+                            <outputDirectory>E:\company\Blog\blog-sunset-app\blog-sunset-portal-app</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>-->
+    <!--<build>
+        <plugins>
+            &lt;!&ndash; 此插件必须放在父 POM 中  &ndash;&gt;
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    &lt;!&ndash;
+                    执行本插件的方法为，在主目录下执行如下命令：
+                    mvn package assembly:single
+
+                    对于 IntelliJ IDEA，生成的 JAR 包位于每个模块下的文件夹 target
+                    &ndash;&gt;
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            &lt;!&ndash; 此处 IntelliJ IDEA 可能会报红，这是正常现象  &ndash;&gt;
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            &lt;!&ndash; 配置程序运行入口所在的类 &ndash;&gt;
+                            <mainClass>com.jin.blog.sunset.portal.SunsetPortalApplication</mainClass>
+                        </manifest>
+                    </archive>
+                    &lt;!&ndash; 设置 JAR 包输出目录 &ndash;&gt;
+                    <outputDirectory>E:\company\Blog\blog-sunset-app\blog-sunset-portal-app</outputDirectory>
+                    &lt;!&ndash; 设置打包后的 JAR 包的目录结构为默认 &ndash;&gt;
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>-->
+    <!--<build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.7.3</version>
-                <configuration>
-                    <!-- 指定该Main Class为全局的唯一入口 -->
-                    <mainClass>com.jin.blog.sunset.portal.SunsetPortalApplication</mainClass>
-                    <layout>ZIP</layout>
-                </configuration>
+            </plugin>
+        </plugins>
+        <finalName>portal</finalName>
+    </build>-->
+    <build>
+        <plugins>
+            <plugin>
+                <!--该插件主要用途：构建可执行的JAR -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.3</version>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
-    </build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
 
+        </resources>
+
+    </build>
 </project>

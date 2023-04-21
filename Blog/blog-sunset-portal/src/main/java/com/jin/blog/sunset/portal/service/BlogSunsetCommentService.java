@@ -1,9 +1,9 @@
 package com.jin.blog.sunset.portal.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.jin.blog.sunset.base.service.SunsetService;
 import com.jin.blog.sunset.base.vo.CommentVo;
 import com.jin.blog.sunset.core.entity.BlogSunsetComment;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,5 +23,6 @@ public interface BlogSunsetCommentService extends SunsetService<BlogSunsetCommen
      * @Param id 文章id
      * @return list 评论列表
      **/
+    @Transactional
     List<CommentVo> findArticleComment(Integer id);
 }

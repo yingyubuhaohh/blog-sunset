@@ -20,18 +20,18 @@ import java.util.ArrayList;
  * @author: jinzelei
  * @date: 2023/1/31 14:21
  **/
-@Configuration
-@EnableSwagger2
+//@Configuration
+//@EnableSwagger2
 public class SwaggerConfig {
 
     // http://localhost:8090/doc.html 推荐使用地址
     // http://localhost:8090/swagger-ui.html
 
-    @Value("${swagger.portal.enable}")
-    private Boolean portalSwaggerEnable;
-
-    @Value("${swagger.system.enable}")
+    //@Value("${swagger.system.enable: false}")
     private Boolean systemSwaggerEnable;
+
+    //@Value("${swagger.portal.enable: false}")
+    private Boolean portalSwaggerEnable;
 
     private String host = "localhost:8100/";
 
@@ -39,7 +39,7 @@ public class SwaggerConfig {
      * 前台门户的api文档
      * @return
      */
-    @Bean
+    //@Bean
     public Docket portalDocket(){
         return new Docket(DocumentationType.SWAGGER_2)// api的类型
                 .apiInfo(portalApiInfo())// api文档基本信息
@@ -56,7 +56,7 @@ public class SwaggerConfig {
                 .contact(new Contact("jinzelei","150.158.172.107:8080","2690708525@qq.com"))// 联系方式
                 .description("为博客前台准备的API文档")// 说明
                 .version("1.0.0")// 版本
-                .termsOfServiceUrl("150.158.172.107:8080")// 网址
+                .termsOfServiceUrl("150.158.172.107:8091")// 网址
                 .build();
     }
 
@@ -64,7 +64,7 @@ public class SwaggerConfig {
      * 后台管理的api文档
      * @return
      */
-    @Bean
+    //@Bean
     public Docket systemDocket(){
         //if (BooleanUtil.isTrue(systemSwaggerEnable)) return null;
         //System.out.println(systemSwaggerEnable+"&&"+portalSwaggerEnable);
